@@ -61,17 +61,12 @@ links = [
      lazy_gettext("link to Corey Schafer youtube tutorial")),
 
     (lazy_gettext("Full code description (Czech)"),
-     'https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH',
+     'https://github.com/Sudip2708/poustovnik-rozbor.git',
      '_blank',
      lazy_gettext("code analysis in Czech")),
 
-    (lazy_gettext("Short code description (Czech)"),
-     'https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH',
-     '_blank',
-     lazy_gettext("code analysis in Czech (short version)")),
-
     (lazy_gettext("Code in readable form (English)"),
-     'https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH',
+     'https://github.com/Sudip2708/poustovnik-english.git',
      '_blank',
      lazy_gettext("code in English transcribed into readable notation")),
 

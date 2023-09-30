@@ -7,7 +7,8 @@ Vzhledem k tomu, že při vytváření jsem si hodně pomáhla hromadným přepi
 Nicméně mně osobně velmi pomohlo kód si takto rozepsat. Nejen, že jsem se v kódu lépe vyznal, ale i lépe mu porozuměl a pochopil.
 Konečná verze kódu, která je již psaná s ohledy na Best Practise a v angličtině, má řadu drobných (ale občas i důležitých) změn, které jsem už sem zpětně nedoplnil. A tak účel zveřejnění této verze je čistě jen pro ten případ, že by se někomu hodilo vidět, takto rozepsaný kód :-)
 
-Konečnou verzi kódu pak můžete najít zde: www.github.com
+Konečnou verzi kódu pak můžete najít zde: https://github.com/Sudip2708/poustovnik-english.git
+
 A stránku pak zde: https://poustovnik.fun/
 
 ### Seznam komponent:
