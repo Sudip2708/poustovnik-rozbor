@@ -1,0 +1,173 @@
+/* css pro dodatečnou stylizaci obsahu stránky */
+/* (hlavní část stylizace je nastavena přes boodstrap) */
+
+
+/* .ybg = styl pro žluté pozadí (pro ověření rámečku prvku)  */
+.ybg {
+    background: yellow;
+}
+
+
+/* .sp-name = styl pro nastavení vzhledu uživatelského jména v postranním panelu (side_panel) */
+.sp-name {
+    font-size: 1.3em;
+}
+
+
+/* .input-hight = styl pro nastavení velikosti vstupního pole (create_post)  */
+.input-hight {
+    height: 200px
+}
+
+/* .lang-flag = styl pro umístění vlaječky pro přepínání jazyka stránky (layout) */
+.lang-flag {
+    margin: 0em 0.2em 0.0em 0.8em;
+}
+
+
+/* .fs= styl pro nastavení hlavního nadpisu stránky (layout) */
+.fs {
+    font-size: 1.3em;
+    margin: 0em 0.9em 0.2em 0.1em;
+}
+
+
+/* .fileUpload = styl pro vzhled tlačítka pro nahrání uživatelského obrázku (account) */
+/* :file-selector-button = spseudoelement reprezentující tlačítko imputu (account) */
+.fileUpload::file-selector-button {
+    border: 1px solid grey;
+    padding: 0.2em 0.4em;
+    border-radius: 0.2em;
+}
+
+
+/* .fileUpload = styl pro vzhled tlačítka pro nahrání uživatelského obrázku (account) */
+/* :file-selector-button = pseudo element reprezentující tlačítko imputu (account) */
+/* :hover = nastavení vzhledu při najetí myší nad prvek (account) */
+.fileUpload::file-selector-button:hover {
+    background-color: dark-grey;
+    border: 2px solid #00cec9;
+}
+
+
+/* body = styl pro vzhled celého těla stránky */
+body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+}
+
+
+/* h1, h2, h3, h4, h5, h6 = styl pro všechny nadpisy */
+h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+}
+
+
+/* .bg-steel = styl pro kontejner seskupující navigační část lišty (layout) */
+.bg-steel {
+    background-color: #5f788a;
+}
+
+
+/* .site-header = styl pro kontejner pro hlavičku obsahu stránky (layout) */
+/* .navbar-nav = styl pro kontejner pro levou stranu navigační lišty (layout) */
+/* .nav-link = styl pro kontejner pro pravou stranu navigační lišty  (layout) */
+.site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+}
+
+
+/* .site-header = styl pro kontejner pro hlavičku obsahu stránky (layout) */
+/* .navbar-nav = styl pro kontejner pro levou stranu navigační lišty (layout) */
+/* .nav-link = styl pro kontejner pro pravou stranu navigační lišty  (layout) */
+/* :hover = nastavení vzhledu při najetí myší nad prvek (account) */
+.site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
+
+
+/* .site-header = styl pro kontejner pro hlavičku obsahu stránky (layout) */
+/* .navbar-nav = styl pro kontejner pro levou stranu navigační lišty (layout) */
+/* .nav-link = styl pro kontejner pro pravou stranu navigační lišty  (layout) */
+/* .active = nastavení vzhledu při kliknutí myší nad prvek (account) */
+.site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+
+
+/* .content-section = styl pro kontejnery pro vkládaný obsah do stránky */
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+
+/* .article-title = styl pro nadpis (home, post, user_posts) */
+.article-title {
+    color: #444444;
+}
+
+
+/* .article-title = styl pro nadpis (home, post, user_posts) */
+/* :hover = nastavení vzhledu při najetí myší nad prvek (account) */
+a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+}
+
+
+/* .article-content = styl pro obsah příspěvku (home, post, user_posts) */
+.article-content {
+    white-space: pre-line;
+}
+
+
+/* .article-img = styl pro profilový obrázek autora (home, post, user_posts) */
+.article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+}
+
+
+/* .article-metadata = styl pro kontejner sdružující jméno autora a datum příspěvku (home, post, user_posts) */
+.article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+}
+
+
+/* .article-metadata = styl pro kontejner sdružující jméno autora a datum příspěvku (home, post, user_posts) */
+/* :hover = nastavení vzhledu při najetí myší nad prvek (account) */
+.article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+
+/* .article-svg = nastavení filtru svg */
+.article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+
+/* .account-img = styl pro profilový obrázek autora (account) */
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+
+/* .account-heading = styl pro jméno uživatele (account) */
+.account-heading {
+    font-size: 2.5rem;
+}

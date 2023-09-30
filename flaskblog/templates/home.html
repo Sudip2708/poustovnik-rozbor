@@ -1,0 +1,209 @@
+<!-- DOMÁCÍ STRÁNKA SE VŠEMI PŘÍSPĚVKY -->
+
+
+<!-- PROPOJENÍ S LAYOUTEM -->
+{% extends "layout.html" %}
+<!-- [% extends "layout.html" %]: propojení s hlavním layoutem [jinja2] -->
+
+
+<!-- BLOK PRO ROZŠÍŘENÍ LAYOUTU -->
+{% block content %}
+<!-- [% block content %]: začátek bloku [jinja2] -->
+
+
+    <!-- ČÁST PRO PŘÍSPĚVKY -->
+    {% for post in posts.items %}
+    <!-- cyklus (for) pro každý příspěvek z příspěvků vytažených z databáze pro tuto stránku [jinja2] -->
+
+
+        <!-- KONTEJNER PRO PŘÍSPĚVKY -->
+        <article class="media content-section">
+        <!-- article: začátek kontejneru pro výpis příspěvku [html] -->
+        <!-- class="media content-section": třída pro nastavení vzhledu [bootstrap] -->
+
+
+            <!-- SESKUPENÍ PŘÍSPĚVKU-->
+            <div class="media-body">
+            <!-- div: začátek oblasti příspěvku [html] -->
+            <!-- class="media-body": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- PROFILOVÝ OBRÁZEK AUTORA -->
+                <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+                <!-- img: kontejner na obrázek [html] -->
+                <!-- class="rounded-circle": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- class="article-img": třída pro nastavení vzhledu [css] -->
+                <!-- src="[[ url_for...: specifikace URL cety k mediu (zde přes url_for) [html] [jinja2] -->
+
+
+                <!-- ČÁST PRO JMÉNO AUTORA A DATUM PŘÍSPĚVKU -->
+                <div class="article-metadata">
+                <!-- div: začátek oblasti s informacemim o autorovi příspěvku [html] -->
+                <!-- class="article-metadata": třída pro nastavení vzhledu [css] -->
+
+
+                    <!-- JMÉNO AUTORA PŘÍSPĚVKU -->
+                    <a id={{ post.id }} class="mr-2" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                    <!-- a: začátek části pro hypertextový odkaz [html] -->
+                    <!-- class="mr-2": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                    <!-- [[ post.author.username ]]: název odkazu (zde přes proměnnou) [jinja2] -->
+                    <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+
+                    <!-- DATUM PŘÍSPĚVKU -->
+                    <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
+                    <!-- small: začátek části s menším textem [html] -->
+                    <!-- class="text-muted": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- [[ post.date_posted.strftime('%Y-%m-%d') ]]: data datumu a času [jinja2]-->
+                    <!-- /small: konec části s menším textem [html] -->
+
+                </div>
+                <!-- /div: konec oblasti s infem o autorovi příspěvku [html] -->
+
+
+                <!-- PODMÍNKA, POKUD SE JEDNÁ O PŘÍSPĚVEK, KTERÝ MÁ BÝT PŘELOŽEN -->
+                {% if translate[0] == post.id %}
+                <!-- [% if translate[0] == : podmínka, je-li id přeloženého příspěvku rovno [jinja2] -->
+                <!-- post.id %]: id příspěvku [jinja2] -->
+
+
+                    <!-- NÁZEV PŘÍSPĚVKU -->
+                    <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ translate[1] }}</a></h2>
+                    <!-- h2: začátek nadpisu druhé nejvyšší důležitosti [html] -->
+                    <!-- class="article-title": atribut pro nastavení vlastností prvku [bootstrap] -->
+                    <!-- >[[  translate[1] ]]<: odkaz pro přeložený nadpis příspěvku [jinja2] -->
+                    <!-- /h2: konec nadpisu druhé nejvyšší důležitosti [html] -->
+
+
+                    <!-- OBSAH PŘÍSPĚVKU -->
+                    <p class="article-content">{{ translate[2] }}</p>
+                    <!-- p: začátek odstavce [html] -->
+                    <!-- class="article-content": atribut pro nastavení vlastností prvku [bootstrap] -->
+                    <!-- >[[ translate[2] ]]<: odkaz pro přeložený obsah příspěvku [jinja2] -->
+                    <!-- /p: konec odstavce [html] -->
+
+
+                <!-- PODMÍNKA, POKUD SE NEJEDNÁ O PŘÍSPĚVEK, KTERÝ MÁ BÝT PŘELOŽEN -->
+                {% else %}
+                <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+
+                    <!-- NADPIS PŘÍSPĚVKU -->
+                    <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                    <!-- h2: začátek nadpisu druhé nejvyšší důležitosti [html] -->
+                    <!-- a: začátek části pro hypertextový odkaz [html] -->
+                    <!-- class="article-title": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                    <!-- [[ post.title ]]: odkaz na název příspěvku [jinja2] -->
+                    <!-- /a: konec části pro hypertextový odkaz [html] -->
+                    <!-- /h2: konec nadpisu druhé nejvyšší důležitosti [html] -->
+
+
+                    <!-- OBSAH PŘÍSPĚVKU -->
+                    <p class="article-content">{{ post.content }}</p>
+                    <!-- p: začátek odstavce [html] -->
+                    <!-- class="article-content": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- [[ post.content ]]: odkaz na obsah příspěvku [jinja2] -->
+                    <!-- /p: konec odstavce [html] -->
+
+                {% endif %}
+                <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+
+                <!-- PODMÍNKA PRO ZOBRAZENÍ ODKAZU PRO PŘEKLAD PŘÍSPĚVKU -->
+                {% if post.lang != lflag %}
+                <!-- [% if post.lang != : podmínka, Ppokud jazyk příspěvku není shodný [jinja2] -->
+                <!-- lflag %]: s jazykem prostředí [jinja2] -->
+
+
+                    <!-- ODKAZU PRO PŘEKLAD PŘÍSPĚVKU -->
+                    <small class="text-muted">
+                    <!-- small: začátek části s menším textem [html] -->
+                    <!-- class="text-muted": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                        <!-- ZOBRAZENÍ ODKAZU PRO PŘEKLAD -->
+                        <a href="{{ url_for('main.translate', post_id=post.id) }}">{{ _("Translate") }}</a>
+                        <!-- a: začátek části pro hypertextový odkaz [html] -->
+                        <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                        <!-- [[ _(Beck to original) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                        <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+                    </small>
+                    <!-- /small: konec části s menším textem [html] -->
+
+                {% endif %}
+                <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+            </div>
+            <!-- /div: konec oblasti příspěvku [html] -->
+
+        </article>
+        <!-- /article: konec kontejneru pro výpis příspěvku [html] -->
+
+    {% endfor %}
+    <!-- [% endfor %]: konec cyklu (for) [jinja2] -->
+
+
+    <!-- STRÁNKOVÁNÍ -->
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    <!-- for page_num: cyklus (for) pro každou stranu (list) stránky [jinja2] -->
+    <!-- in posts.iter_pages(): v metodě pro počítání stránek [jinja2] -->
+    <!-- (left_edge=1, right_edge=1, left_current=1, right_current=2): nastavení parametrů metody [jinja2] -->
+
+
+        <!-- PODMÍNKA - ZJIŠTĚNÍ ZDA JE VÍCE STRÁNEK -->
+        {% if page_num %}
+        <!-- [% if page_num %]: podmínka (if) existuje-li číslo stránky [jinja2] -->
+
+
+            <!-- PODMÍNKA PRO OVĚŘENÍ ZDA JE STRÁNKA PŘÍSPĚVKU SHODNÁ S ČÍSLEM STRÁNKY -->
+            {% if posts.page == page_num %}
+            <!-- [% if posts.page == page_num %]: podmínka (if) je-li číslo stránky shodné se stránkou příspěvku [jinja2] -->
+
+
+                <!-- ZOBRAZENÍ ČÍSLA AKTUÁLNÍ STRÁNKY -->
+                <a class="btn btn-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                <!-- a: začátek části pro hypertextový odkaz [html] -->
+                <!-- class="btn btn-info mb-4": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                <!-- [[ page_num ]]: číslo stránky (zde přes proměnnou) [jinja2] -->
+                <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+
+            <!-- PODMÍNKA PRO PŘÍPAD KDY STRÁNKA PŘÍSPĚVKU NENÍ SHODNÁ S ČÍSLEM STRÁNKY -->
+            {% else %}
+            <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+
+                <!-- ZOBRAZENÍ DALŠÍCH STRÁNEK -->
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                <!-- a: začátek části pro hypertextový odkaz [html] -->
+                <!-- class="btn btn-outline-info mb-4": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                <!-- [[ page_num ]]: číslo stránky (zde přes proměnnou) [jinja2] -->
+                <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+            {% endif %}
+            <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+
+        <!-- PODMÍNKA KDYŽ NENÍ VÍCE STRÁNEK -->
+        {% else %}
+        <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+
+            <!-- ZOBRAZENÍ ZÁSTUPNÉHO SYMBOLU -->
+            ...
+            <!-- ...: zástupný symbol (ellipsis) [jinja2] -->
+
+        {% endif %}
+        <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+    {% endfor %}
+    <!-- [% endfor %]: konec cyklu (for) [jinja2] -->
+
+
+{% endblock content %}
+<!-- konec bloku [jinja2] -->

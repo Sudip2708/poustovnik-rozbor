@@ -1,0 +1,39 @@
+<!-- ŠABLONA PRO PŮVODNÍ POSTRANNÍ PANEL -->
+
+
+<!-- NADPIS POSTRANNÍHO PANELU -->
+<h3>{{ _("Our Sidebar") }}</h3>
+<!-- h3: začátek nadpisu [html] -->
+<!-- >[[ _("Our Sidebar") ]]<: zobrazený text [html] -->
+<!-- /h3: konec nadpisu [html] -->
+
+
+<!-- PODNADPIS POSTRANNÍHO PANELU -->
+<p class="text-muted">{{ _("You can put any information here you'd like.") }}
+<!-- p: začátek odstavce [html] -->
+<!-- class="text-muted": třída pro nastavení vzhledu [bootstrap] -->
+<!-- [[ _(You can...) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+
+
+    <!-- SEZNAM S POLOŽKAMI POSTRANNÍHO PANELU -->
+    <ul class="list-group">
+    <!-- ul: začátek neuspořádaného seznamu [html] -->
+    <!-- class="list-group": třída pro nastavení vzhledu [bootstrap] -->
+
+
+        <!-- POLOŽKY POSTRANNÍHO PANELU -->
+        <li class="list-group-item list-group-item-light">{{ _("Latest Posts") }}</li>
+        <li class="list-group-item list-group-item-light">{{ _("Announcements") }}</li>
+        <li class="list-group-item list-group-item-light">{{ _("Calendars") }}</li>
+        <li class="list-group-item list-group-item-light">{{ _("etc") }}</li>
+        <!-- li: začátek definice položky seznamu [html] -->
+        <!-- class="list-group-item": třída pro nastavení vzhledu [bootstrap] -->
+        <!-- class="list-group-item-light": třída pro nastavení vzhledu [bootstrap] -->
+        <!-- [[ _(Latest Posts) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+        <!-- /li: konec definice položky seznamu [html] -->
+
+    </ul>
+    <!-- /ul: konec neuspořádaného seznamu [html] -->
+
+</p>
+<!-- /p: konec odstavce [html] -->

@@ -1,0 +1,375 @@
+<!-- STRÁNKA PRO ÚPRAVU PŘÍSPĚVKU -->
+
+
+<!-- PROPOJENÍ S LAYOUTEM -->
+{% extends "layout.html" %}
+<!-- [% extends "layout.html" %]: propojení s hlavním layoutem [jinja2] -->
+
+
+<!-- BLOK PRO ROZŠÍŘENÍ LAYOUTU -->
+{% block content %}
+<!-- [% block content %]: začátek bloku [jinja2] -->
+
+
+    <!-- KONTEJNER PRO OBSAH STRÁNKY -->
+    <article class="media content-section">
+    <!-- article: začátek kontejneru pro výpis příspěvku [html] -->
+    <!-- class="media content-section": třída pro nastavení vzhledu [bootstrap] -->
+
+
+        <!-- SESKUPENÍ PŘÍSPĚVKU-->
+        <div class="media-body">
+        <!-- div: začátek kontejneru seskupující hlavičku příspěvku a příspěvek [html] -->
+        <!-- class="media-body": třída pro nastavení vzhledu [bootstrap] -->
+
+
+            <!-- KONTEJNER PRO SESKUPENÍ PROFILOVÉHO OBRÁZKU, JMÉNA AUTORA A DATUMU PŘÍSPĚVKU -->
+            <div class="article-metadata row justify-content-between m-1">
+            <!-- div: začátek kontejneru seskupující hlavičku příspěvku [html] -->
+            <!-- class="article-metadata": třída pro nastavení vzhledu [css] -->
+
+
+                <!-- KONTEJNER PRO SESKUPENÍ PROFILOVÉHO OBRÁZKU A JMÉNA AUTORA PŘÍSPĚVKU -->
+                <div class="row">
+                <!-- div: začátek kontejneru seskupující profilový obrázek a jméno [html] -->
+                <!-- class="row": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- PROFILOVÝ OBRÁZEK AUTORA -->
+                    <img class="rounded-circle article-img mb-1 ml-2" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+                    <!-- img: kontejner na obrázek [html] -->
+                    <!-- class="rounded-circle mb-1 ml-2": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- class="article-img": třída pro nastavení vzhledu [css] -->
+                    <!-- src="[[ url_for...: specifikace URL cety k mediu (zde přes url_for) [html] [jinja2] -->
+
+
+                    <!-- JMÉNO AUTORA PŘÍSPĚVKU -->
+                    <a class="align-self-end mb-1" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                    <!-- a: začátek části pro hypertextový odkaz [html] -->
+                    <!-- class="align-self-end mr-2": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                    <!-- [[ post.author.username ]]: název odkazu (zde přes proměnnou) [jinja2] -->
+                    <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+                </div>
+                <!-- div: KONEC kontejneru seskupující profilový obrázek a jméno [html] -->
+
+
+                <!-- KONTEJNER PRO DATUMU PŘÍSPĚVKU -->
+                <div class="row">
+                <!-- div: začátek kontejneru pro datum příspěvku [html] -->
+                <!-- class="row": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- DATUM PŘÍSPĚVKU -->
+                    <small class="align-self-end mb-1 mr-3 text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
+                    <!-- small: začátek části s menším textem [html] -->
+                    <!-- class="align-self-end mb-1 mr-3 text-muted": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- [[ post.date_posted.strftime('%Y-%m-%d') ]]: data datumu a času [jinja2]-->
+                    <!-- /small: konec části s menším textem [html] -->
+
+                </div>
+                <!-- div: konec kontejneru pro datum příspěvku [html] -->
+
+            </div>
+            <!-- /div: konec kontejneru seskupující hlavičku příspěvku [html] -->
+
+
+            <!-- KONTEJNER PRO SESKUPENÍ NÁZVU A OBSAHU PŘÍSPĚVKU -->
+            <div class="article-metadata mt-3">
+            <!-- div: začátek kontejneru seskupující hlavičku příspěvku [html] -->
+            <!-- class="article-metadata": třída pro nastavení vzhledu [css] -->
+
+
+                <!-- PODMÍNKA, POKUD SE JEDNÁ O PŘÍSPĚVEK, KTERÝ MÁ BÝT PŘELOŽEN -->
+                {% if translate[0] == post.id %}
+                <!-- [% if translate[0] == : podmínka, je-li id přeloženého příspěvku rovno [jinja2] -->
+                <!-- post.id %]: id příspěvku [jinja2] -->
+
+
+                    <!-- NÁZEV PŘÍSPĚVKU -->
+                    <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ translate[1] }}</a></h2>
+                    <!-- h2: začátek nadpisu druhé nejvyšší důležitosti [html] -->
+                    <!-- class="article-title": atribut pro nastavení vlastností prvku [bootstrap] -->
+                    <!-- >[[  translate[1] ]]<: odkaz pro přeložený nadpis příspěvku [jinja2] -->
+                    <!-- /h2: konec nadpisu druhé nejvyšší důležitosti [html] -->
+
+
+                    <!-- OBSAH PŘÍSPĚVKU -->
+                    <p class="article-content">{{ translate[2] }}</p>
+                    <!-- p: začátek odstavce [html] -->
+                    <!-- class="article-content": atribut pro nastavení vlastností prvku [bootstrap] -->
+                    <!-- >[[ translate[2] ]]<: odkaz pro přeložený obsah příspěvku [jinja2] -->
+                    <!-- /p: konec odstavce [html] -->
+
+
+                <!-- PODMÍNKA, POKUD SE JEDNÁ O PŘÍSPĚVEK, KTERÝ MÁ BÝT PŘELOŽEN -->
+                {% else %}
+                <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+
+                    <!-- NÁZEV PŘÍSPĚVKU -->
+                    <h2 class="article-title">{{ post.title }}</h2>
+                    <!-- h2: začátek nadpisu druhé nejvyšší důležitosti [html] -->
+                    <!-- class="article-title": atribut pro nastavení vlastností prvku [bootstrap] -->
+                    <!-- >[[ post.title ]]<: odkaz pro nadpis příspěvku [jinja2] -->
+                    <!-- /h2: konec nadpisu druhé nejvyšší důležitosti [html] -->
+
+
+                    <!-- OBSAH PŘÍSPĚVKU -->
+                    <p class="article-content">{{ post.content }}</p>
+                    <!-- p: začátek odstavce [html] -->
+                    <!-- class="article-content": atribut pro nastavení vlastností prvku [bootstrap] -->
+                    <!-- >[[ post.content ]]<: odkaz pro obsah příspěvku [jinja2] -->
+                    <!-- /p: konec odstavce [html] -->
+
+                {% endif %}
+                <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+
+                <!-- PODMÍNKA PRO ZOBRAZENÍ ODKAZU PRO PŘEKLAD PŘÍSPĚVKU -->
+                {% if post.lang != lflag %}
+                <!-- [% if post.lang != : podmínka, Ppokud jazyk příspěvku není shodný [jinja2] -->
+                <!-- lflag %]: s jazykem prostředí [jinja2] -->
+
+
+                    <!-- ODKAZU PRO PŘEKLAD PŘÍSPĚVKU -->
+                    <small class="text-muted">
+                    <!-- small: začátek části s menším textem [html] -->
+                    <!-- class="text-muted": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                        <!-- PODMÍNKA, POKUD SE JEDNÁ O PŘÍSPĚVEK, KTERÝ MÁ BÝT PŘELOŽEN -->
+                        {% if translate[0] == post.id %}
+                        <!-- [% if translate[0] == : podmínka, je-li id přeloženého příspěvku rovno [jinja2] -->
+                        <!-- post.id %]: id příspěvku [jinja2] -->
+
+
+                            <!-- ZOBRAZENÍ ODKAZU PRO NAVRÁCENÍ PŮVODNÍHO TEXTU -->
+                            <a href="{{ url_for('posts.post', post_id=post.id) }}">{{ _("Back to original") }}</a>
+                            <!-- a: začátek části pro hypertextový odkaz [html] -->
+                            <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                            <!-- [[ _(Beck to original) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                            <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+
+                        <!-- PODMÍNKA, POKUD SE NEJEDNÁ O PŘÍSPĚVEK, KTERÝ MÁ BÝT PŘELOŽEN -->
+                        {% else %}
+                        <!-- [% else %]: podmínka, není-li autorem příspěvku přihlášený uživatel -->
+
+
+                            <!-- ZOBRAZENÍ ODKAZU PRO PŘEKLAD -->
+                            <a href="{{ url_for('main.translate', post_id=post.id) }}">{{ _("Translate") }}</a>
+                            <!-- a: začátek části pro hypertextový odkaz [html] -->
+                            <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                            <!-- [[ _(Translate) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                            <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+                        {% endif %}
+                        <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+                    </small>
+                    <!-- /small: konec části s menším textem [html] -->
+
+                {% endif %}
+                <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+            </div>
+            <!-- /div: konec kontejneru seskupující hlavičku příspěvku [html] -->
+
+
+            <!-- ZOBRAZENÍ EDITAČNÍCH NÁSTROJŮ -->
+            {% if post.author == current_user %}
+            <!-- [% if post.author == current_user %]: podmínka, je-li autorem příspěvku přihlášený uživatel [jinja2]->
+
+
+                <!-- KONTEJNER PRO SESKUPENÍ TLAČÍTEK -->
+                <div class="d-flex justify-content-between mt-3 mb-3">
+                <!-- div: začátek kontejneru seskupující tlačítka pro úpravu příspěvku [html] -->
+                <!-- class="d-flex justify-content-between mt-3 mb-3": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- KONTEJNER PRO PŘEDNÍ ČÁST TLAČÍTEK -->
+                    <div class="mt-1 mb-1">
+                    <!-- div: začátek kontejneru seskupující tlačítka na přední pozici [html] -->
+
+                        <!-- TLAČÍTKO PRO ÚPRAVU PŘÍSPĚVKU -->
+                        <a class="btn btn-secondary" href="{{ url_for('posts.update_post', post_id=post.id) }}">{{ _("Update") }}</a>
+                        <!-- a: začátek části pro hypertextový odkaz [html] -->
+                        <!-- class="btn btn-secondary btn-sm mt-1 mb-1": třída pro nastavení vzhledu [bootstrap] -->
+                        <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                        <!-- [[ _(Update) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                        <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+
+                        <!-- TLAČÍTKO PRO SMAZÁNÍ PŘÍSPĚVKU -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">{{ _("Delete") }}</button>
+                        <!-- button: začátek definice pole tlačítka [html] -->
+                        <!-- type="button": definice typu tlačítka [html] -->
+                        <!-- class="btn btn-danger btn-sm m-1": třída pro nastavení vzhledu [bootstrap] -->
+                        <!-- data-toggle="modal": přiřazení předdefinované šablony [html] -->
+                        <!-- data-target="#deleteModal": atribut pro nastavení vlastností prvku [bootstrap] -->
+                        <!-- [[ _(Delete) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                        <!-- /button: konec definice pole tlačítka [html] -->
+
+                    </div>
+                    <!-- div: konec kontejneru seskupující tlačítka na přední pozici [html] -->
+
+
+                    <!-- KONTEJNER PRO ZADNÍ ČÁST TLAČÍTEK -->
+                    <div>
+                    <!-- div: začátek kontejneru seskupující tlačítka na koncové pozici [html] -->
+
+
+                        <!-- TLAČÍTKO PRO KROK ZPĚT -->
+                        <button class="btn btn-outline-secondary mt-1" type="button" onclick="history.back()">{{ _("Back") }}</button>
+                        <!-- button: začátek definice pole tlačítka [html] -->
+                        <!-- class="btn btn-outline-secondary" třída pro nastavení vzhledu [bootstrap] -->
+                        <!-- type="button": definice typu tlačítka [html] -->
+                        <!-- onclick="history.back()": definice funkce, příkaz pro krok zpět [html] -->
+                        <!-- [[ _(Back) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                        <!-- /button: konec definice pole tlačítka [html] -->
+
+
+                    </div>
+                    <!-- div: konec kontejneru seskupující tlačítka na koncové pozici [html] -->
+
+                </div>
+                <!-- /div: konec kontejneru seskupující tlačítka pro úpravu příspěvku [html] -->
+
+
+            <!-- PODMÍNKA, POKUD SE NEJEDNÁ O PŘÍSPĚVEK, KTERÝ MÁ BÝT PŘELOŽEN -->
+            {% else %}
+            <!-- [% else %]: podmínka, není-li autorem příspěvku přihlášený uživatel -->
+
+
+                <!-- TLAČÍTKO PRO KROK ZPĚT -->
+                <button class="btn btn-outline-secondary mt-3 mb-3" type="button" onclick="history.back()">{{ _("Back") }}</button>
+                <!-- button: začátek definice pole tlačítka [html] -->
+                <!-- class="btn btn-outline-secondary" třída pro nastavení vzhledu [bootstrap] -->
+                <!-- type="button": definice typu tlačítka [html] -->
+                <!-- onclick="history.back()": definice funkce, příkaz pro krok zpět [html] -->
+                <!-- [[ _(Back) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                <!-- /button: konec definice pole tlačítka [html] -->
+
+
+            {% endif %}
+            <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+        </div>
+        <!-- /div: konec kontejneru seskupující hlavičku příspěvku a příspěvek [html] -->
+
+    </article>
+    <!-- /article: konec kontejneru pro výpis příspěvku [html] -->
+
+
+    <!-- HLAVNÍ KONTEJNER PRO VYSKAKUJÍCÍ OKNO PRO POTVRZENÍ SMAZÁNÍ -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <!-- div: začátek kontejneru seskupujícího prvky pro vyskakující okno pro potvrzení smazání příspěvku [html] -->
+    <!-- class="modal fade": třída pro nastavení vzhledu [bootstrap] -->
+    <!-- id="deleteModal": id pro nastavení vzhledu [bootstrap] -->
+    <!-- tabindex="-1": atribut pro nastavení prvku [bootstrap] -->
+    <!-- role="dialog": atribut pro nastavení prvku [bootstrap] -->
+    <!-- aria-labelledby="deleteModalLabel": atribut pro nastavení vlastností prvku [bootstrap] -->
+    <!-- aria-hidden="true": atribut pro nastavení prvku [bootstrap] -->
+
+
+        <!-- PODKONTEJNER PRO VYSKAKUJÍCÍ OKNO PRO POTVRZENÍ SMAZÁNÍ -->
+        <div class="modal-dialog" role="document">
+        <!-- div: začátek kontejneru pro kontejner seskupující další prvky [html] -->
+        <!-- : třída pro nastavení vzhledu [bootstrap] -->
+        <!-- : atribut pro nastavení prvku [bootstrap] -->
+
+
+            <!-- KONTEJNER SESKUPUJÍCÍ POPIS A TLAČÍTKA PRO POTVRZENÍ SMAZÁNÍ -->
+            <div class="modal-content">
+            <!-- div: začátek kontejneru seskupující další prvky [html] -->
+            <!-- class="modal-content": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- KONTEJNER PRO POPIS VYSKAKUJÍCÍHO OKNA PRO SMAZÁNÍ PŘÍSPĚVKU -->
+                <div class="modal-header">
+                <!-- div: začátek kontejneru seskupující další prvky [html] -->
+                <!-- class="modal-header": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- NADPIS VYSKAKUJÍCÍHO OKNA PRO SMAZÁNÍ PŘÍSPĚVKU -->
+                    <h5 class="modal-title" id="deleteModalLabel">{{ _("Delete Post?") }}</h5>
+                    <!-- h5: začátek nadpisu druhé nejnižší úrovně (důležitosti) [html] -->
+                    <!-- class="modal-title": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- id="deleteModalLabel": id pro nastavení vzhledu [bootstrap] -->
+                    <!-- [[ _(Delete Post?) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                    <!-- /h5: konec nadpisu druhé nejnižší úrovně (důležitosti) [html] -->
+
+
+                    <!-- TLAČÍTKO PRO KŘÍŽEK ZAVÍRAJÍCÍ VYSKAKUJÍCÍ OKNO -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- button: začátek definice pole tlačítka [html] -->
+                    <!-- type="button": definice typu tlačítka [html] -->
+                    <!-- class="close": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- data-dismiss="modal": atribut pro nastavení prvku [bootstrap] -->
+                    <!-- aria-label="Close": atribut pro nastavení prvku [bootstrap] -->
+
+
+                        <!-- KŘÍŽEK ZAVÍRAJÍCÍ VYSKAKUJÍCÍHO OKNA PRO SMAZÁNÍ PŘÍSPĚVKU -->
+                        <span aria-hidden="true">&times;</span>
+                        <!-- span: začátek řádkového elementu [html] -->
+                        <!-- aria-hidden="true": atribut pro nastavení prvku [bootstrap] -->
+                        <!-- >x<: znak pro křížek [html]-->
+                        <!-- /span: konec řádkového elementu [html] -->
+
+                    </button>
+                    <!-- /button: konec definice pole tlačítka [html] -->
+
+                </div>
+                <!-- /div: konec kontejneru seskupující další prvky [html] -->
+
+
+                <!-- KONTEJNER NA SESKUPENÍ TLAČÍTEK PRO SMAZÁNÍ PŘÍSPĚVKU -->
+                <div class="modal-footer">
+                <!-- div: začátek kontejneru seskupující další prvky [html] -->
+                <!-- class="modal-footer": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- TLAČÍTKO PRO ZAVŘENÍ OKNA -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _("Close") }}</button>
+                    <!-- button: začátek definice pole tlačítka [html] -->
+                    <!-- type="button": definice typu tlačítka [html] -->
+                    <!-- class="btn btn-secondary": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- data-dismiss="modal": atribut pro nastavení prvku [bootstrap] -->
+                    <!-- [[ _(Close) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                    <!-- /button: konec definice pole tlačítka [html] -->
+
+
+                    <!-- FORMULÁŘ PRO SMAZÁNÍ PŘÍSPĚVKU -->
+                    <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
+                    <!-- form: začátek formulářové části [html] -->
+                    <!-- method="POST": nastavení metody na odesílání dat [html] -->
+                    <!-- action="": atribut určující, kam se mají odeslat data formuláře při odeslání formuláře [html] -->
+
+
+                        <!-- TLAČÍTKO PRO SMAZÁNÍ PŘÍSPĚVKU -->
+                        <input class="btn btn-danger" type="submit" value={{ _("Delete") }}>
+                        <!-- input: vstupní pole pro data [html] -->
+                        <!-- class="btn btn-danger": třída pro nastavení vzhledu [bootstrap] -->
+                        <!-- type="submit": definice typu tlačítka [html] -->
+                        <!-- value="Delete": definice funkce tlačítka [html] -->
+
+                    </form>
+                    <!-- /form: konec formulářové části [html] -->
+
+                </div>
+                <!-- /div: konec kontejneru seskupující další prvky [html] -->
+
+            </div>
+            <!-- /div: konec kontejneru seskupující další prvky [html] -->
+
+        </div>
+        <!-- /div: konec kontejneru pro kontejner seskupující další prvky [html] -->
+
+    </div>
+    <!-- /div: konec kontejneru seskupujícího prvky pro vyskakující okno pro potvrzení smazání příspěvku [html] -->
+
+
+{% endblock content %}
+<!-- [% endblock content %]: konec bloku [jinja2] -->

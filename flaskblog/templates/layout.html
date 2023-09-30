@@ -1,0 +1,360 @@
+<!-- LAYOUT PRO VŠECHNY STRÁNKY WEBU -->
+<!DOCTYPE html>
+<!-- DOCTYPE html: označení html obsahu [html] -->
+
+
+<!-- KONTEJNER HLAVIČKU A TĚLO WEBU -->
+<html>
+<!-- html: začátek html souboru [html] -->
+
+
+<!-- KONTEJNER HLAVIČKY WEBU -->
+<head>
+<!-- head: začátek hlavičky webu (informace pro prohlížeče a vyhledávače) [html] -->
+
+
+    <!-- NASTAVENÍ ZNAKOVÉ SADY -->
+    <meta charset="utf-8">
+    <!-- meta: definice metadat [html] -->
+    <!-- charset="utf-8": nastavení znakové sady na utf-8 [html] -->
+
+
+    <!-- NASTAVENÍ RESPONZIVNÍ CHOVÁNÍ (NASTAVENÍ CSS PIXELŮ) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta: definice metadat [html] -->
+    <!-- name="viewport": název [html] -->
+    <!-- content="width=device-width": nastavení šířky na 100% viewportu [html] -->
+    <!-- content="initial-scale=1": nastavení pro výchozí zoom [html] -->
+
+
+    <!-- LINK PRO CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- link: definuje vztah mezi aktuálním dokumentem a externím zdrojem [html] -->
+    <!-- rel="stylesheet": specifikuje vztah k dokumentu (stylesheet je css dokument) [html] -->
+    <!-- href="https...": specifikuje umístění dokumentu [html] -->
+    <!-- integrity="sha384...": umožňuje prohlížeči zkontrolovat script [html] -->
+    <!-- crossorigin="anonymous": podpora CORS (při načítání scriptu se neodesílají žádné přihlašovací údaje) [html] -->
+
+
+    <!-- LINK PRO CSS HLAVNÍHO OBSAHU STRÁNKY, HREF JE V JINJA2 ZÁVORKÁCH A DEFINOVÁN MODULEM URL_FOR -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <!-- link: definuje vztah mezi aktuálním dokumentem a externím zdrojem [html] -->
+    <!-- rel="stylesheet": specifikuje vztah k dokumentu (stylesheet je css dokument) [html] -->
+    <!-- type="text/css": specifikuje typ dokumentu [html] -->
+    <!-- href="[[ url_for('static', filename='main.css') ]]": specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+
+
+    <!-- LINK PRO NAČTENÍ FAVICON (IKONA STRÁNKY) -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!-- link: definuje vztah mezi aktuálním dokumentem a externím zdrojem [html] -->
+    <!-- rel="shortcut icon": specifikuje vztah k dokumentu (shortcut icon je favicon) [html] -->
+    <!-- href="[[ url_for('static', filename='favicon.ico') ]]": specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+
+
+    <!-- LINK PRO NAČTENÍ VLAJEK PRO JAZYK STRÁNKY (FLAG-ICONS) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.11.0/css/flag-icons.min.css">
+    <!-- link: definuje vztah mezi aktuálním dokumentem a externím zdrojem [html] -->
+    <!-- rel="stylesheet": specifikuje vztah k dokumentu (stylesheet je css dokument) [html] -->
+    <!-- href="https:...": specifikuje umístění dokumentu [html] -->
+
+
+    <!-- ZOBRAZENÍ NÁZVU STRÁNKY V ADRESE WEBU -->
+    {% if title %}
+    <!-- [% if title %]: pokud má stránka svůj podnázev [jinja2] -->
+
+        <title>{{ _("Flask Blog") }} - {{ title }}</title>
+        <!-- title: začátek definice názvu stránky [html] -->
+        <!-- [[ _(Flask Blog) ]] název stránky + označení textu pro překlad [jinja2] [babel] -->
+        <!-- [[ title ]]: za text (Flask Blog) doplň podnázev stránky ([[ title ]]) [html] [jinja2] -->
+        <!-- /title: konec definice názvu stránky [html] -->
+
+    {% else %}
+    <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+        <title>{{ _("Flask Blog") }}</title>
+        <!-- title: začátek definice názvu stránky [html] -->
+        <!-- [[ _(Flask Blog) ]] název stránky + označení textu pro překlad [jinja2] [babel] -->
+        <!-- /title: konec definice názvu stránky [html] -->
+
+    {% endif %}
+    <!-- [% endif %]: konec podmínky [jinja2] -->
+
+</head>
+<!-- /head: konec hlavičky webu [html] -->
+
+
+<!-- KONTEJNER PRO OBSAH STRÁNKY -->
+<body>
+<!-- body: začátek těla webu (obsah webu) [html] -->
+
+
+    <!-- KONTEJNER PRO HLAVIČKU OBSAHU STRÁNKY -->
+    <header class="site-header">
+    <!-- header: začátek hlavičky webu [html] -->
+    <!-- class="site-header": třída pro nastavení vzhledu [css] -->
+
+
+        <!-- KONTEJNER PRO SESKUPENÍ NAVIGAČNÍ ČÁSTI STRÁNKY -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <!-- nav: začátek navigační části  [html] -->
+        <!-- class="navbar": třída pro nastavení vzhledu [bootstrap] -->
+        <!-- class="navbar-expand-md": třída pro nastavení vzhledu [bootstrap] -->
+        <!-- class="navbar-dark": třída pro nastavení vzhledu [bootstrap] -->
+        <!-- class="bg-steel": třída pro nastavení vzhledu [css] -->
+        <!-- class="fixed-top" třída pro nastavení vzhledu [bootstrap] -->
+
+
+            <!-- PODKONTEJNER PRO SESKUPENÍ NAVIGAČNÍ ČÁSTI STRÁNKY -->
+            <div class="container">
+            <!-- div: začátek oblasti pro navigační prvky [html] -->
+            <!-- class="container": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- URL A POPIS TLAČÍTKA -->
+                <a class="navbar-brand fs" href="/">{{ _("Flask Blog") }}</a>
+                <!-- a: začátek části pro hypertextový odkaz [html] -->
+                <!-- class="navbar-brand": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- class="fs": třída pro nastavení vzhledu [css] -->
+                <!-- href="/": specifikuje umístění dokumentu [html] -->
+                <!-- [[ _(Flask Blog) ]] název + označení textu pro překlad [jinja2] [babel] -->
+                <!-- >Flask Blog<: zobrazený text [html] -->
+                <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+
+                <!-- TLAČÍTKO -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- button: začátek definice pole tlačítka [html] -->
+                <!-- class="navbar-toggler": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- type="button": definice typu tlačítka [html] -->
+                <!-- data-toggle="collapse": přiřazení předdefinované šablony [html] -->
+                <!-- data-target="#navbarToggle": atribut pro nastavení vlastností prvku [bootstrap] -->
+                <!-- aria-controls="navbarToggle": atribut pro nastavení vlastností prvku [bootstrap] -->
+                <!-- aria-expanded="false": atribut pro nastavení vlastností prvku [bootstrap] -->
+                <!-- aria-label="Toggle navigation": atribut pro nastavení vlastností prvku [bootstrap] -->
+                <!-- span: začátek řádkového elementu [html] -->
+                <!-- class="navbar-toggler-icon": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- /span: konec řádkového elementu [html] -->
+                <!-- /button: konec definice pole tlačítka [html] -->
+
+
+                <!-- KONTEJNER NA SESKUPENÍ NAVIGAČNÍ LIŠTY -->
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                <!-- div: začátek oblasti pro navigační lištu [html] -->
+                <!-- class="collapse": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- class="navbar-collapse": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- id="navbarToggle": id pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- KONTEJNER PRO LEVOU STRANU NAVIGAČNÍ LIŠTY (home, about) -->
+                    <div class="navbar-nav mr-auto">
+                        <a class="nav-item nav-link" href="{{ url_for('main.home') }}">{{ _("Home") }}</a>
+                        <a class="nav-item nav-link" href="{{ url_for('main.about') }}">{{ _("About") }}</a>
+                    </div>
+                    <!-- div: začátek oblasti navigační lišty (levá strana) [html] -->
+                    <!-- class="navbar-nav": třída pro nastavení vzhledu [css] -->
+                    <!-- class="mr-auto": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- a: začátek části pro hypertextový odkaz [html] -->
+                    <!-- class="nav-item": třída pro nastavení vzhledu [bootstrap] -->
+                    <!-- class="nav-link": třída pro nastavení vzhledu [css] -->
+                    <!-- href="[[ url_for('main.xxx') ]]": specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                    <!-- [[ _(Home) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                    <!-- /a: konec části pro hypertextový odkaz [html] -->
+                    <!-- /div: konec oblasti navigační lišty (levá strana) [html] -->
+
+
+                    <!-- KONTEJNER PRO PRAVOU STRANU NAVIGAČNÍ LIŠTY (login, registred / new post, account, logout) -->
+                    <div class="navbar-nav">
+                    <!-- div: začátek oblasti navigační lišty (pravá strana) [html] -->
+                    <!-- class="navbar-nav": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                        <!-- NASTAVENÍ ZOBRAZENÍ LIŠTY, JE-LI UŽIVATEL PŘIHLÁSEN -->
+                        {% if current_user.is_authenticated %}
+                        <!-- [% if current_user.is_authenticated %}]: podmínka (if) aktuální uživatel (current_user) je autorizován / přihlášen (is_authenticated) [jinja2] -->
+
+                            <a class="nav-item nav-link" href="{{ url_for('posts.new_post') }}">{{ _("New Post") }}</a>
+                            <a class="nav-item nav-link" href="{{ url_for('users.account') }}">{{ _("Account") }}</a>
+                            <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">{{ _("Logout") }}</a>
+                            <!-- a: začátek části pro hypertextový odkaz [html] -->
+                            <!-- class="nav-item": třída pro nastavení vzhledu [bootstrap] -->
+                            <!-- class="nav-link": třída pro nastavení vzhledu [css] -->
+                            <!-- href="[[ url_for('posts.new_post') ]]": specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                            <!-- [[ _(New Post) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                            <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+
+                        <!-- NASTAVENÍ ZOBRAZENÍ LIŠTY, NENÍ-LI UŽIVATEL PŘIHLÁSEN -->
+                        {% else %}
+                        <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+                            <a class="nav-item nav-link" href="{{ url_for('users.login') }}">{{ _("Login") }}</a>
+                            <a class="nav-item nav-link" href="{{ url_for('users.register') }}">{{ _("Register") }}</a>
+                            <!-- a: začátek části pro hypertextový odkaz [html] -->
+                            <!-- class="nav-item": třída pro nastavení vzhledu [bootstrap] -->
+                            <!-- class="nav-link": třída pro nastavení vzhledu [css] -->
+                            <!-- href="[[ url_for('posts.login') ]]": specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                            <!-- [[ _(Login) ]]: zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                            <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+                        {% endif %}
+                        <!-- [% endif %]: konec podmínky [jinja2] -->
+
+                    </div>
+                    <!-- /div: konec oblasti navigační lišty (pravá strana) [html] -->
+
+
+                    <!-- KONTEJNER PRO VLAJKY JAZYKA -->
+                    <div class="d-none d-lg-block">
+                    <!-- div: začátek oblasti pro vlajku jazyka [html] -->
+                    <!-- class="d-none d-lg-block": třída pro skrytí prvku na malých zařízeních [bootstrap] -->
+
+
+                        <!-- ODKAZ NA STRÁNKU JAZYKA -->
+                        <a class="lang-flag" href="{{ url_for('main.langh') }}">
+                        <!-- a: začátek části pro hypertextový odkaz [html] -->
+                        <!-- class="lang-flag": třída pro nastavení vzhledu [css] -->
+                        <!-- href="[[ url_for('main.langh') ]]": specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                        <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+
+                            <!-- PODMÍNKA PRO ZOBRAZENÍ, JE-LI JAZYK EN -->
+                            {% if lflag == "en" %}
+                            <!-- [% if lflag == 'en' %]: podmínka (if) pokud stránka obdržela hodnotu 'en'  [jinja2] -->
+
+
+                                <!-- KONTEJNER S US VLAJEČKOU  -->
+                                <span class="fi fi-us flw"></span>
+                                <!-- span: začátek řádkového elementu [html] -->
+                                <!-- class="fi fi-us flw": třída pro zobrazení vlaječky [flag-icon] -->
+                                <!-- /span: konec řádkového elementu [html] -->
+
+
+                            <!-- PODMÍNKA PRO ZOBRAZENÍ, NENÍ-LI JAZYK EN (JE CS) -->
+                            {% else %}
+                            <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+
+                                <!-- KONTEJNER S CZ VLAJEČKOU  -->
+                                <span class="fi fi-cz"></span>
+                                <!-- span: začátek řádkového elementu [html] -->
+                                <!-- class="fi fi-us flw": třída pro zobrazení vlaječky [flag-icon] -->
+                                <!-- /span: konec řádkového elementu [html] -->
+
+                            {% endif %}
+                            <!-- [% endif %]: konec podmínky [jinja2] -->
+
+                        </a>
+                        <!-- /div: konec kontejneru pro url vlajky jazyka [html] -->
+
+                    </div>
+                    <!-- /div: konec oblasti pro vlajku jazyka [html] -->
+
+                </div>
+                <!-- /div: konec oblasti pro navigační lištu [html] -->
+
+            </div>
+            <!-- /div: konec oblasti pro navigační prvky [html]  -->
+
+        </nav>
+        <!-- /nav: konec navigační části [html] -->
+
+    </header>
+    <!-- /header: konec hlavičky webu [html] -->
+
+
+    <!-- KONTEJNER PRO TĚLO OBSAHU STRÁNKY -->
+    <main role="main" class="container">
+    <!-- main: začátek hlavního obsahu stránky [html] -->
+    <!-- role="main": atribut pro nastavení vlastností prvku [bootstrap] -->
+    <!-- class="container": třída pro nastavení vzhledu [bootstrap] -->
+
+
+        <!-- PODKONTEJNER PRO TĚLO OBSAHU STRÁNKY -->
+        <div class="row">
+        <!-- div: začátek oblasti pro hlavní obsahu stránky [html] -->
+        <!-- class="row": třída pro nastavení vzhledu [bootstrap] -->
+
+
+            <!-- KONTEJNER PRO JEDNORÁZOVÉ OZNAMY APLIKACE -->
+            <div class="col-md-8">
+            <!-- div: začátek oblasti pro hlavní část hlavního obsahu stránky [html] -->
+            <!-- class="col-md-8": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- ZACHYCENÍ JEDNORÁZOVÉHO OZNAMU -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                <!-- [% with messages = get_flashed_messages(with_categories=true) %]: vyzkoušej (with) zda jsou nějaké zprávy pro zobrazení( get_flashed_messages(with_categories=true), pokud ano, přidej je do proměnné (messages) [jinja2] -->
+
+
+                    <!-- PODMÍNKA PRO PŘÍPAD ZACHYCENÍ OZNAMU -->
+                    {% if messages %}
+                    <!-- [% if messages %]: podmínka (if) pokud proměnná (messages) není prázdná [jinja2] -->
+
+
+                        <!-- CYKLUS NA PROCHÁZENÍ OZNAMŮ -->
+                        {% for category, message in messages %}
+                        <!-- [% for category, message in messages %]: vytvoř cyklus (for) pro každou zprávu, kterou rozděl do proměnných druh zprávy (category) a obsah zprávy (message) [jinja2] -->
+
+
+                            <!-- KONTEJNER NA VÝPIS OZNAMU -->
+                            <div class="alert alert-{{ category }}">
+                            <!-- div: začátek oblasti pro jednorázový oznam (flush) [html] -->
+                            <!-- class="alert": třída pro nastavení vzhledu [bootstrap] -->
+                            <!-- class="alert-[[ category ]]": třída pro nastavení vzhledu [bootstrap] + označení druhu zprávy [jinja2] -->
+
+
+                                <!-- VÝPIS OZNAMU -->
+                                {{ message }}
+                                <!-- [[ message ]]: obsah zprávy [jinja2] -->
+
+                            </div>
+                            <!-- /div: konec oblasti pro jednorázový oznam (flush) [html] -->
+
+                        {% endfor %}
+                        <!-- [% endfor %]: konec cyklu (for) [jinja2] -->
+
+                    {% endif %}
+                    <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+                {% endwith %}
+                <!-- [% endwith %]: konec podmínky (with) [jinja2] -->
+
+
+                <!-- MÍSTO PRO NAPOJENÍ OBSAHU KONKRÉTNÍ STRÁNKY -->
+                {% block content %}{% endblock %}
+                <!-- [% block content %]: začátek obsahu stránky [jinja2] -->
+                <!-- [% endblock %]: konec obsahu stránky [jinja2] -->
+
+            </div>
+            <!-- /div: konec oblasti pro hlavní část hlavního obsahu stránky [html] -->
+
+
+            <!-- MÍSTO PRO NAPOJENÍ ŠABLONY PRO POSTRANNÍ PANEL (z důvodu lepší přehlednosti)-->
+            {% include "side_panel.html" %}
+            <!-- [% include 'side_panel.html' %]: připoj (include) obsah html s názvem side_panel ('side_panel.html') [jinja2] -->
+
+        </div>
+        <!-- /div: konec oblasti pro hlavní obsahu stránky [html] -->
+
+    </main>
+    <!-- /main: konec hlavního obsahu stránky [html] -->
+
+
+    <!-- SCRIPTY PRO FUNGOVÁNÍ BOOTSTRAPU -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- script: začátek skriptu [html] -->
+    <!-- src="https:...": specifikace URL cesty k mediu [html] -->
+    <!-- integrity="sha384": umožňuje prohlížeči zkontrolovat script [html] -->
+    <!-- crossorigin="anonymous": podpora CORS (při načítání scriptu se neodesílají žádné přihlašovací údaje) [html] -->
+    <!-- /script: konec skriptu [html] -->
+
+</body>
+<!-- /body: konec těla webu [html] -->
+
+</html>
+<!-- /html: konec html souboru [html] -->

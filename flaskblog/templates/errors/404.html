@@ -1,0 +1,38 @@
+<!-- STRÁNKA PRO OZNAM O CHYBĚ 404 -->
+
+
+<!-- PROPOJENÍ S LAYOUTEM -->
+{% extends "layout.html" %}
+<!-- [% extends "layout.html" %]: propojení s hlavním layoutem [jinja2] -->
+
+
+<!-- BLOK PRO ROZŠÍŘENÍ LAYOUTU -->
+{% block content %}
+<!-- [% block content %]: začátek bloku [jinja2] -->
+
+
+    <!-- KONTEJNER PRO OBSAH STRÁNKY -->
+    <div class="content-section">
+    <!-- div: začátek kontejneru na obsah stránky [html] -->
+    <!-- class="content-section": třída pro nastavení vzhledu [css] -->
+
+
+        <!-- OZNAM O CHYBĚ -->
+        <h1>{{ _("Oops. Page Not Found (404)") }}</h1>
+        <!-- h1: začátek nadpisu nejvyšší důležitosti [html] -->
+        <!-- [[ _(Oops. Page Not Found (404)) ]] oznam o chybě + označení textu pro překlad [jinja2] [babel] -->
+        <!-- /h1: konec nadpisu nejvyšší důležitosti [html] -->
+
+
+        <!-- VYSVĚTLENÍ CHYBY -->
+        <p>{{ _("That page does not exist. Please try a different location") }}</p>
+        <!-- p: začátek odstavce [html] -->
+        <!-- [[ _(That page does not...) ]] rozšíření oznamu + označení textu pro překlad [jinja2] [babel] -->
+        <!-- /p: konec odstavce [html] -->
+
+    </div>
+    <!-- /div: konec kontejneru na obsah stránky [html] -->
+
+{% endblock content %}
+<!-- [% endblock content %]: konec bloku [jinja2] -->
+

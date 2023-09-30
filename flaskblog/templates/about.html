@@ -1,0 +1,97 @@
+<!-- STRÁNKA PRO PŘÍSPĚVKY OD JEDNOHO UŽIVATELE -->
+
+
+<!-- PROPOJENÍ S LAYOUTEM -->
+{% extends "layout.html" %}
+<!-- [% extends "layout.html" %]: propojení s hlavním layoutem [jinja2] -->
+
+
+<!-- BLOK PRO ROZŠÍŘENÍ LAYOUTU -->
+{% block content %}
+<!-- [% block content %]: začátek bloku [jinja2] -->
+
+
+    <!-- KONTEJNER PRO ÚVODNÍ ČÁST -->
+    <div class="media">
+        <!-- div: začátek kontejneru na obrázek, uživatelské jméno a email [html] -->
+        <!-- class="media": třída pro nastavení vzhledu [bootstrap] -->
+
+
+        <!-- KONTEJNER PRO NADPIS A PODTITUL -->
+        <div class="media-body">
+            <!-- div: začátek kontejneru pro popisné údaje [html] -->
+            <!-- class="media-body": třída pro nastavení vzhledu [bootstrap] -->
+
+
+            <!-- NADPIS -->
+            <h2 class="account-heading">{{ _("About this page") }}</h2>
+            <!-- h2: začátek nadpisu druhé nejvyšší důležitosti [html] -->
+            <!-- class="account-heading": třída pro nastavení vzhledu [css] -->
+            <!-- [[ _("About this page") ]]: nadpis [jinja2] -->
+            <!-- /h2: konec nadpisu druhé nejvyšší důležitosti [html] -->
+
+
+            <!-- PODTITUL -->
+            <p class="text-secondary mt-3">{{ _("First of all, thank you for visiting") }}</p>
+            <!-- p: začátek odstavce [html] -->
+            <!-- class="text-secondary mt-2"": třída pro nastavení vzhledu [css] -->
+            <!-- [[ _("First of all, thank you for visiting") ]]: podtitul [jinja2] -->
+            <!-- /p: konec odstavce [html] -->
+
+        </div>
+        <!-- /div: konec  kontejneru pro popisné údaje [html] -->
+
+
+        <!-- PROFILOVÝ OBRÁZEK -->
+        <img class="rounded-circle account-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+        <!-- img: kontejner na obrázek [html] -->
+        <!-- class="rounded-circle": třída pro nastavení vzhledu [bootstrap] -->
+        <!-- class="account-img": třída pro nastavení vzhledu [css] -->
+        <!-- src="[[ url_for... ]]": specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+
+    </div>
+    <!-- /div: konec kontejneru na obrázek, uživatelské jméno a email [html] -->
+
+
+    <!-- ČÁST PRO PŘÍSPĚVKY -->
+    {% for title, content in text %}
+    <!-- cyklus (for) pro každý příspěvek z příspěvků obdržených z main/routes.py [jinja2] -->
+
+
+        <!-- KONTEJNER PRO PŘÍSPĚVKY -->
+        <article class="media">
+        <!-- article: začátek kontejneru pro výpis příspěvku [html] -->
+        <!-- class="media content-section": třída pro nastavení vzhledu [bootstrap] -->
+
+
+            <!-- SESKUPENÍ PŘÍSPĚVKU-->
+            <div class="media-body mb-4">
+            <!-- div: začátek oblasti příspěvku [html] -->
+            <!-- class="media-body": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- NADPIS ODSTAVCE -->
+                <h6>{{ title }}</h6>
+                <!-- h6: začátek kontejneru pro nejmenší nadpis [html] -->
+                <!-- [[ title ]]: odkaz na nadpis příspěvku [jinja2] -->
+                <!-- /h6: konec kontejneru pro nejmenší nadpis [html] -->
+
+
+                <!-- OBSAH ODSTAVCE -->
+                <p class="article-content mt-3">{{ content }}</p>
+                <!-- p: začátek odstavcového kontejneru pro text [html] -->
+                <!-- class="article-content": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- [[ content ]]: odkaz na tělo příspěvku [jinja2] -->
+                <!-- /p: konec odstavcového kontejneru pro text [html] -->
+
+            </div>
+            <!-- /div: konec oblasti příspěvku [html] -->
+
+        </article>
+        <!-- /article: konec kontejneru pro výpis příspěvku [html] -->
+
+    {% endfor %}
+    <!-- [% endfor %]: konec cyklu (for) [jinja2] -->
+
+{% endblock content %}
+<!-- [% endblock content %]: konec bloku [jinja2] -->

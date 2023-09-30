@@ -1,0 +1,37 @@
+<!-- STRÁNKA PRO OZNAM O CHYBĚ 403 -->
+
+
+<!-- PROPOJENÍ S LAYOUTEM -->
+{% extends "layout.html" %}
+<!-- [% extends "layout.html" %]: propojení s hlavním layoutem [jinja2] -->
+
+
+<!-- BLOK PRO ROZŠÍŘENÍ LAYOUTU -->
+{% block content %}
+<!-- [% block content %]: začátek bloku [jinja2] -->
+
+
+    <!-- KONTEJNER PRO OBSAH STRÁNKY -->
+    <div class="content-section">
+    <!-- div: začátek kontejneru na obsah stránky [html] -->
+    <!-- class="content-section": třída pro nastavení vzhledu [css] -->
+
+
+        <!-- OZNAM O CHYBĚ -->
+        <h1>{{ _("You don't have permission to do that (403)") }}</h1>
+        <!-- h1: začátek nadpisu nejvyšší důležitosti [html] -->
+        <!-- [[ _(You don't have permission to do that (403)) ]] oznam o chybě + označení textu pro překlad [jinja2] [babel] -->
+        <!-- /h1: konec nadpisu nejvyšší důležitosti [html] -->
+
+
+        <!-- VYSVĚTLENÍ CHYBY -->
+        <p>{{ _("Please check your account and try again") }}</p>
+        <!-- p: začátek odstavce [html] -->
+        <!-- [[ _(Please check your...) ]] rozšíření oznamu + označení textu pro překlad [jinja2] [babel] -->
+        <!-- /p: konec odstavce [html] -->
+
+    </div>
+    <!-- /div: konec kontejneru na obsah stránky [html] -->
+
+{% endblock content %}
+<!-- [% endblock content %]: konec bloku [jinja2] -->

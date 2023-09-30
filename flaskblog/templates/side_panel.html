@@ -1,0 +1,167 @@
+<!-- ŠABLONA PRO POSTRANNÍ PANEL -->
+
+
+<!-- POSTRANNÍ PANEL -->
+<div class="col-md-4">
+<!-- div: začátek oblasti pro postranní panel hlavního obsahu stránky [html] -->
+<!-- class="col-md-4": třída pro nastavení vzhledu [bootstrap] -->
+
+
+    <!-- KONTEJNER NA SESKUPENÍ OBSAHU POSTRANNÍHO PANELU -->
+    <div class="content-section">
+    <!-- div: začátek oblasti obsahu postranního panelu [html] -->
+    <!-- class="content-section": třída pro nastavení vzhledu [css] -->
+
+
+        <!-- PODMÍNKA PRO ZOBRAZENÍ POSTRANNÍHO PANELU JSME-LI NA STRÁNCE ABOUT  -->
+        {% if links %}
+        <!-- [% if links %]: podmínka (if) pokud stránka obdržela proměnnou links (odkazy odeslané stránkou About) [jinja2] -->
+
+
+            <!-- KONTEJNER PRO NADPIS A PODNADPIS POSTRANNÍHO PANELU -->
+            <div class="article-metadata mb-3">
+            <!-- div: začátek oblasti pro nadpis a podnadpis postranního panelu [html] -->
+            <!-- class="article-metadata mb-3": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- NADPIS POSTRANNÍHO PANELU -->
+                <h3 class="mt-2 mb-3">{{ _("Links") }}</h3>
+                <!-- h3: začátek nadpisu [html] -->
+                <!-- >[[ _("Odkazy") ]]<: zobrazený text [html] -->
+                <!-- /h3: konec nadpisu [html] -->
+
+
+                <!-- PODNADPIS POSTRANNÍHO PANELU -->
+                <p class="text-muted">{{ _("Here are some links you might find useful") }}</p>
+                <!-- p: začátek odstavce [html] -->
+                <!-- class="text-muted": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- [[ _(You can...) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+
+            </div>
+            <!-- /div: konec oblasti pro nadpis a podnadpis postranního panelu [html] -->
+
+
+
+            <!-- KONTEJNER PRO INSTRUKTÁŽNÍ PŘÍSPĚVKY -->
+            <div class="article-metadata mb-3">
+            <!-- div: začátek oblasti pro instruktážní příspěvky [html] -->
+            <!-- class="article-metadata mb-3": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- PODMÍNKA PRO ZOBRAZENÍ, JE-LI JAZYK EN -->
+                {% if lflag == "en" %}
+                <!-- [% if lflag == 'en' %]: podmínka (if) pokud stránka obdržela hodnotu 'en'  [jinja2] -->
+
+
+                    <p><a href={{ url_for('posts.post', post_id='28') }} >{{ _("What you can do here?") }}</a></p>
+                    <p><a href={{ url_for('posts.post', post_id='30') }} >{{ _("The changes I made") }}</a></p>
+                    <p><a href={{ url_for('posts.post', post_id='32') }} >{{ _("A known issue") }}</a></p>
+
+
+                <!-- PODMÍNKA PRO ZOBRAZENÍ, NENÍ-LI JAZYK EN (JE CS) -->
+                {% else %}
+                <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+                    <p><a href={{ url_for('posts.post', post_id='29') }} >{{ _("What you can do here?") }}</a></p>
+                    <p><a href={{ url_for('posts.post', post_id='31') }} >{{ _("The changes I made") }}</a></p>
+                    <p><a href={{ url_for('posts.post', post_id='31') }} >{{ _("A known issue") }}</a></p>
+
+                {% endif %}
+                <!-- [% endif %]: konec podmínky [jinja2] -->
+
+            </div>
+            <!-- /div: konec oblasti pro instruktážní příspěvky [html] -->
+
+
+
+            <!-- CYKLUS PRO JEDNOTLIVÉ ODKAZY -->
+            {% for name, url, trgt, description in links %}
+            <!-- [% for name, url in links %]: vytvoř cyklus (for) pro kažý odkaz, který rozděl do proměnné pro jméno (name) a link (url) [jinja2] -->
+
+
+                <!-- ODKAZ V POSTRANNÍM PANELU -->
+                <p><a href={{ url }} target={{ trgt }}>{{ name }}</a><br><small class="text-muted">{{ description }}</small></p>
+                <!-- p: začátek odstavce [html] -->
+                <!-- class="list-group-item": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- class="list-group-item-light": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- a: začátek části pro hypertextový odkaz [html] -->
+                <!-- href={{ url }}: specifikuje url pomocí metody url_for [html] [jinja2] -->
+                <!-- target="_blank": nastavení pro otevírání odkazú v novém okně -->
+                <!-- >[[ name ]]<: zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                <!-- /a: konec části pro hypertextový odkaz [html] -->
+                <!-- /p: konec odstavce [html] -->
+
+            {% endfor %}
+            <!-- [% endfor %]: konec cyklu (for) [jinja2] -->
+
+
+        <!-- PODMÍNKA PRO ZOBRAZENÍ POSTRANNÍHO PANELU NEJSME-LI NA STRÁNCE ABOUT  -->
+        {% else %}
+        <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+
+            <!-- PODMÍNKA PRO ZOBRAZENÍ POSTRANNÍHO PANELU, JE-LI UŽIVATEL PŘIHLÁSEN -->
+            {% if current_user.is_authenticated %}
+            <!-- [% if current_user.is_authenticated %}]: podmínka (if) aktuální uživatel (current_user) je autorizován / přihlášen (is_authenticated) [jinja2] -->
+
+
+                <!-- KONTEJNER PRO ODDĚLENÍ OBSAHU S PROFILOVÝM OBRÁZEK OD PŮVODNÍ ŠABLONY -->
+                <div class="article-metadata mb-3">
+                <!-- div: začátek oblasti s informacemim o autorovi příspěvku [html] -->
+                <!-- class="article-metadata": třída pro nastavení vzhledu [css] -->
+                <!-- class="mb-3": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- KONTEJNER PRO SESKUPENÍ PROFILOVÉHO OBRÁZU A JMÉNA UŽIVATELE -->
+                    <div class="row">
+                    <!-- div: začátek oblasti seskupující obrázek a jméno přihlášeného uživatele [html] -->
+                    <!-- class="row": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                        <!-- PROFILOVÝ OBRÁZEK -->
+                        <img class="account-img rounded ml-3 mb-3 mt-2" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}">
+                        <!-- img: kontejner na obrázek [html] -->
+                        <!-- class="account-img rounded mt-2": třída pro nastavení vzhledu [bootstrap] -->
+                        <!-- src="[[ url_for... ]]": specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+
+
+                        <!-- JMÉNO PŘIHLÁŠENÉHO UŽIVATELE -->
+                        <a class="align-self-end sp-name ml-3 mb-3" href="{{ url_for('users.user_posts', username=current_user.username) }}">{{ current_user.username }}</a>
+                        <!-- a: začátek části pro hypertextový odkaz [html] -->
+                        <!-- class="pb-2": třída pro nastavení vzhledu [bootstrap] -->
+                        <!-- href="[[ url_for...: specifikuje umístění dokumentu pomocí metody url_for [html] [jinja2] -->
+                        <!-- [[ current_user.username ]]: název odkazu (zde přes proměnnou) [jinja2] -->
+                        <!-- /a: konec části pro hypertextový odkaz [html] -->
+
+                    </div>
+                    <!-- div: konec oblasti seskupující obrázek a jméno přihlášeného uživatele [html] -->
+
+                </div>
+                <!-- div: začátek oblasti s informacemim o autorovi příspěvku [html] -->
+
+
+                <!-- MÍSTO PRO NAPOJENÍ PŮVODNÍ ŠABLONY PRO POSTRANNÍ PANEL (z důvodu aby zde na stránce nebyl kód dvakrát)-->
+                {% include "side_panel_old.html" %}
+                <!-- [% include 'side_panel_old.html' %]: připoj (include) obsah html s názvem side_panel_old ('side_panel_old.html') [jinja2] -->
+
+
+            <!-- NASTAVENÍ ZOBRAZENÍ POSTRANNÍHO PANELU, NENÍ-LI UŽIVATEL PŘIHLÁSEN -->
+            {% else %}
+            <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+
+                <!-- MÍSTO PRO NAPOJENÍ PŮVODNÍ ŠABLONY PRO POSTRANNÍ PANEL (z důvodu aby zde na stránce nebyl kód dvakrát)-->
+                {% include "side_panel_old.html" %}
+                <!-- [% include 'side_panel_old.html' %]: připoj (include) obsah html s názvem side_panel_old ('side_panel_old.html') [jinja2] -->
+
+            {% endif %}
+            <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+        {% endif %}
+        <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+    </div>
+    <!-- /div: konec oblasti obsahu postranního panelu [html] -->
+
+</div>
+<!-- /div: konec oblasti pro postranní panel hlavního obsahu stránky [html] -->

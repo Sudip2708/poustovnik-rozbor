@@ -1,0 +1,209 @@
+<!-- STRÁNKA PRO VYTVOŘENÍ PŘÍSPĚVKU -->
+
+
+<!-- PROPOJENÍ S LAYOUTEM -->
+{% extends "layout.html" %}
+<!-- [% extends "layout.html" %]: propojení s hlavním layoutem [jinja2] -->
+
+
+<!-- BLOK PRO ROZŠÍŘENÍ LAYOUTU -->
+{% block content %}
+<!-- [% block content %]: začátek bloku [jinja2] -->
+
+
+    <!-- KONTEJNER PRO OBSAH STRÁNKY -->
+    <div class="content-section">
+    <!-- div: začátek kontejneru na obsah stránky [html] -->
+    <!-- class="content-section": třída pro nastavení vzhledu [css] -->
+
+
+        <!-- ZAČÁTEK FORMULÁŘOVÉ OBLASTI -->
+        <form method="POST" action="">
+        <!-- form: začátek formulářové části [html] -->
+        <!-- method="POST": nastavení metody na odesílání dat [html] -->
+        <!-- action="": atribut určující, kam se mají odeslat data formuláře při odeslání formuláře [html] -->
+
+
+            <!-- VYTVOŘENÍ SKRYTÉHO POLE PRO TOKEN -->
+            {{ form.hidden_tag() }}
+            <!-- [[ form.hidden_tag() ]]: generátor skrytého pole pro token [jinja2] -->
+
+
+            <!-- SESKUPENÍ FORMULÁŘOVÝCH POLÍ -->
+            <fieldset class="form-group">
+            <!-- fieldset: začátek oblasti seskupující společné prvky formuláře [html] -->
+            <!-- class="form-group": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- NADPIS SEKCE -->
+                <legend class="border-bottom mb-4">{{ legend }}</legend>
+                <!-- legend: začátek oblasti nadpisu pro spojlečné prvky formuláře [html] -->
+                <!-- class="border-bottom mb-4": třída pro nastavení vzhledu [bootstrap] -->
+                <!-- >[[ legend ]]<: odkaz pro nadpis pro seskupení prvků formuláře [jinja2] -->
+                <!-- /legend: konec oblasti nadpisu pro spojlečné prvky formuláře [html] -->
+
+
+                <!-- POLE PRO NADPIS PŘÍSPĚVKU -->
+                <div class="form-group">
+                <!-- div: začátek části pro vstupní pole [html] -->
+                <!-- class="form-group": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- POPISEK POLE -->
+                    {{ form.title.label(class="form-control-label") }}
+                    <!-- [[form.title.label(): pole pro název pole [jinja2] -->
+                    <!-- [[(class="form-control-label"): třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- ZACHACENÍ CHYBNÉHO VSTUPU -->
+                    {% if form.title.errors %}
+                    <!-- [% if form.title.errors %]: podmínka (if) pro případ výskytu chyby [jinja2] -->
+
+
+                        <!-- ZACHACENÍ DRUHU CHYBY -->
+                        {{ form.title(class="form-control form-control-lg is-invalid") }}
+                        <!-- [[form.title(): vstupní pole pro data [jinja2] -->
+                        <!-- (class="form-control form-control-lg is-invalid")]]: třída pro nastavení vzhledu [bootstrap] -->
+
+
+                        <!-- KONTEJNER PRO OZNAM O CHYBĚ -->
+                        <div class="invalid-feedback">
+                        <!-- div: začátek oblasti pro zachycení a výpis chyb [html] -->
+                        <!-- class="invalid-feedback": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                            <!-- PROCHÁZENÍ CHYB -->
+                            {% for error in form.title.errors %}
+                            <!-- [% for error in form.username.errors %]: cyklus (for) pro seznam zachycených chyb [jinja2] -->
+
+
+                                <!-- VÝPIS CHYBY -->
+                                <span>{{ error }}</span>
+                                <!-- span: začátek řádkového elementu [html] -->
+                                <!-- [[ error ]]: výpis chyby [jinja2] -->
+                                <!-- /span: konec řádkového elementu [html] -->
+
+                            {% endfor %}
+                            <!-- [% endfor %]: konec cyklu (for) [jinja2] -->
+
+                        </div>
+                        <!-- /div: konec oblasti pro zachycení a výpis chyb [html] -->
+
+
+                    <!-- PODMÍNKA POKUD JE ZADÁNÍ SPRÁVNÉ -->
+                    {% else %}
+                    <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+
+                        <!-- NAČTENÍ DAT -->
+                        {{ form.title(class="form-control form-control-lg") }}
+                        <!-- [[form.title(): vstupní pole pro data [jinja2] -->
+                        <!-- (class="form-control form-control-lg")]]: třída pro nastavení vzhledu [bootstrap] -->
+
+                    {% endif %}
+                    <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+                </div>
+                <!-- /div: konec části pro vstupní pole [html] -->
+
+
+                <!-- POLE PRO OBSAH PŘÍSPĚVKU -->
+                <div class="form-group" rows="10">
+                <!-- div: začátek části pro vstupní pole [html] -->
+                <!-- class="form-group": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- POPISEK POLE -->
+                    {{ form.content.label(class="form-control-label") }}
+                    <!-- [[form.content.label(): pole pro název pole [jinja2] -->
+                    <!-- [[(class="form-control-label"): třída pro nastavení vzhledu [bootstrap] -->
+
+
+                    <!-- ZACHACENÍ CHYBNÉHO VSTUPU -->
+                    {% if form.content.errors %}
+                    <!-- [% if form.content.errors %]: podmínka (if) pro případ výskytu chyby [jinja2] -->
+
+
+                        <!-- ZACHACENÍ DRUHU CHYBY -->
+                        {{ form.content(class="form-control form-control-lg is-invalid") }}
+                        <!-- [[form.content(): vstupní pole pro data [jinja2] -->
+                        <!-- (class="form-control form-control-lg is-invalid")]]: třída pro nastavení vzhledu [bootstrap] -->
+
+
+                        <!-- KONTEJNER PRO OZNAM O CHYBĚ -->
+                        <div class="invalid-feedback">
+                        <!-- div: začátek oblasti pro zachycení a výpis chyb [html] -->
+                        <!-- class="invalid-feedback": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                            <!-- PROCHÁZENÍ CHYB -->
+                            {% for error in form.content.errors %}
+                            <!-- [% for error in form.username.errors %]: cyklus (for) pro seznam zachycených chyb [jinja2] -->
+
+
+                                <!-- VÝPIS CHYBY -->
+                                <span>{{ error }}</span>
+                                <!-- span: začátek řádkového elementu [html] -->
+                                <!-- [[ error ]]: výpis chyby [jinja2] -->
+                                <!-- /span: konec řádkového elementu [html] -->
+
+                            {% endfor %}
+                            <!-- [% endfor %]: konec cyklu (for) [jinja2] -->
+
+                        </div>
+                        <!-- /div: konec oblasti pro zachycení a výpis chyb [html] -->
+
+
+                    <!-- PODMÍNKA POKUD JE ZADÁNÍ SPRÁVNÉ -->
+                    {% else %}
+                    <!-- [% else %]: pokud předchozí podmínka není splněna [jinja2] -->
+
+
+                        <!-- NAČTENÍ DAT -->
+                        {{ form.content(class="form-control form-control-lg input-hight") }}
+                        <!-- [[form.content(): vstupní pole pro data [jinja2] -->
+                        <!-- (class="form-control form-control-lg")]]: třída pro nastavení vzhledu [bootstrap] -->
+
+                    {% endif %}
+                    <!-- [% endif %]: konec podmínky (if) [jinja2] -->
+
+                </div>
+                <!-- /div: konec části pro vstupní pole [html] -->
+
+            </fieldset>
+            <!-- /fieldset: konec oblasti seskupující společné prvky formuláře [html] -->
+
+
+            <!-- KONTEJNER PRO ODESÍLACÍ TLAČÍTKO -->
+            <div class="form-group d-flex justify-content-between mx-0">
+            <!-- div: začátek části pro odesílací tlačítko [html] -->
+            <!-- class="form-group": třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- TLAČÍTKO PRO ODESLÁNÍ DAT -->
+                {{ form.submit(class="btn btn-secondary") }}
+                <!-- [form.submit(): příkaz na odeslání dat formuláře [jinja2] -->
+                <!-- [(class="btn btn-outline-info"): třída pro nastavení vzhledu [bootstrap] -->
+
+
+                <!-- TLAČÍTKO PRO KROK ZPĚT -->
+                <a class="btn btn-outline-secondary" type="button" href="{{ url_for('main.home') }}">{{ _("Close") }}</a>
+                <!-- a: začátek definice pole tlačítka (zde přes odkaz) [html] -->
+                <!-- class="btn btn-outline-secondary" třída pro nastavení vzhledu [bootstrap] -->
+                <!-- type="button": definice typu tlačítka [html] -->
+                <!-- href="{{ url_for('main.home') }}": odkaz na domovskou stránku [html] [jinja2] -->
+                <!-- [[ _(Close) ]] zobrazený text + označení textu pro překlad [jinja2] [babel] -->
+                <!-- /a: konec definice pole tlačítka [html] -->
+
+
+            </div>
+            <!-- /div: konec části pro odesílací tlačítko [html] -->
+
+        </form>
+        <!-- /form: konec formulářové části [html] -->
+
+    </div>
+    <!-- /div: konec kontejneru na obsah stránky [html] -->
+
+{% endblock content %}
+<!-- [% endblock content %]: konec bloku [jinja2] -->
